@@ -8,6 +8,12 @@
  * @property {string} name
  */
 
+ class Item {
+   constructor(name) {
+   this.name = name;
+   }
+  }
+
 
 /**
  * Class => Weapon(name, damage)
@@ -25,12 +31,18 @@
  * @property {number} damage
  */
 
+ class Weapon extends Item {
+   constructor(name, damage){
+     super(name);
+     this.damage = damage;
+   }
+ }
 
 /**
  * Weapon Extends Item Class
  * -----------------------------
  */
-
+ 
 
 
 /**
@@ -49,6 +61,12 @@
  * @property {number} energy
  */
 
+  class Food extends Item {
+    constructor(name, energy){
+      super(name);
+      this.energy = energy;
+    }
+  }
 
 /**
  * Food Extends Item Class
@@ -79,6 +97,22 @@
  * @property {method} getMaxHealth         Returns private variable `maxHealth`.
  */
 
+  class Player {
+    constructor(name, health, strength, speed){
+      this._pack = [];
+      this._maxHealth = health;
+      this.name = name;
+      this.health = health;
+      this.strength = strength;
+      this.speed = speed;
+      this.isAlive = true;
+      this.equipped = false;
+      this.getPack = () => {return this._pack};
+      this.getMaxHealth = () => {return this._maxHealth}
+      }
+    
+
+  
 
 /**
  * Player Class Method => checkPack()
@@ -92,6 +126,9 @@
  * @name checkPack
  */
 
+    checkPack(){
+      console.log(this.getPack());
+    }
 
 /**
  * Player Class Method => takeItem(item)
@@ -111,6 +148,18 @@
  * @return {boolean} true/false     Whether player was able to store item in pack.
  */
 
+    takeItem(item){
+      if(this._pack.length >= 3){
+        console.log("Pack is full so the item could not be stored.")
+        return false;
+      }
+      else{
+        this._pack.push(item);
+        console.log(Player.name + ", " + item.name + " has successfully been stored.")
+        console.log(this._pack.length)
+        return true;
+      }
+    }
 
 /**
  * Player Class Method => discardItem(item)
@@ -208,7 +257,7 @@
  * @return {string/boolean}   Weapon name or false if nothing is equipped.
  */
 
-
+ }
 /**
  * Class => Zombie(health, strength, speed)
  * -----------------------------
